@@ -1,0 +1,34 @@
+{
+  "compilerOptions": {
+    /* Language and Environment */
+    "target": "esnext",
+    "lib": ["esnext"],
+
+    /* Modules */
+    "module": "nodenext",
+    "resolveJsonModule": true,
+
+    /* JavaScript Support */
+    "allowJs": false,
+
+    /* Emit */
+    "outDir": "./dist",
+
+    /* Interop Constraints */
+    "isolatedModules": true,
+    "forceConsistentCasingInFileNames": true,
+
+    /* Type Checking */
+    "strict": true,
+
+    /* Completeness */
+    "skipLibCheck": true,
+  },
+  "files": [
+    "./src/server.ts",
+  ],
+  "ts-node": {
+    "esm": true,
+    "swc": true,
+  },
+}
