@@ -1,34 +1,29 @@
-import { useState, useEffect } from 'react';
+import { createBrowserRouter, RouterProvider, Outlet } from 'react-router-dom';
+
+import { Error } from './routes/Error';
+import { Admin } from './routes/Admin';
+import { User } from './routes/User';
+
+const router = createBrowserRouter([
+  {
+    path: '/',
+    element: <Outlet />,
+    errorElement: <Error />,
+    children: [
+      {
+        path: 'admin',
+        element: <Admin />,
+      },
+      {
+        path: 'user',
+        element: <User />,
+      },
+    ],
+  },
+]);
 
 export function App() {
-  const [ws, setWs] = useState<WebSocket | null>(null);
-  const [message, setMessage] = useState('');
-
-  useEffect(() => {
-    const ws = new WebSocket(`ws://${window.location.hostname}:8080`);
-    ws.addEventListener('open', () => { setWs(ws); });
-  }, []);
-
-  if (ws === null) {
-    return null;
-  }
-
   return (
-    <>
-      <input
-        type='text'
-        value={message}
-        onChange={(event) => {
-          setMessage(event.target.value);
-        }}
-      />
-      <button
-        onClick={() => {
-          ws.send(message);
-        }}
-      >
-        Send
-      </button>
-    </>
-  );
+    <RouterProvider router={router} />
+  )
 }
